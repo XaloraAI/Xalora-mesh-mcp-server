@@ -2,23 +2,22 @@
 
 ![mesh-2](https://github.com/user-attachments/assets/da67c0e6-0709-4f28-ab82-8abfc0c0734c)
 
-A Model Context Protocol (MCP) server that connects to [Heurist Mesh](https://github.com/heurist-network/heurist-agent-framework/tree/main/mesh) APIs, providing Claude with access to various blockchain and web3 tools.
+A Model Context Protocol (MCP) server that connects to [XaloraMesh] APIs, providing Claude with access to various blockchain and web3 tools.
 
-Heurist Mesh is an open network of purpose-built AI agents and tools, each specialized in particular web3 domains such as blockchain data analysis, smart contract security, token metrics, and blockchain interaction. We are actively growing the Heurist Mesh ecosystem, continuously integrating more tools to expand its capabilities.
+XaloraMesh is an open network of purpose-built AI agents and tools, each specialized in particular web3 domains such as blockchain data analysis, smart contract security, token metrics, and blockchain interaction. We are actively growing the XaloraMesh ecosystem, continuously integrating more tools to expand its capabilities.
 
-<a href="https://glama.ai/mcp/servers/@heurist-network/heurist-mesh-mcp-server">
   <img width="380" height="200" src="https://glama.ai/mcp/servers/@heurist-network/heurist-mesh-mcp-server/badge" alt="Mesh Agent Server MCP server" />
 </a>
 
 ## Features
-- Connects to the Heurist Mesh API 
+- Connects to the XaloraMesh API 
 - Loads tools for cryptocurrency data and Web3 use cases
 - Supports both SSE and stdio transports
 - Works with Claude in Cursor, Claude Desktop, and other MCP-compatible interfaces
 - Use one API key to access multiple services (e.g. CoinGecko crypto market data, GoPlus token security review)
 
 ## 🔥 Just In: Customize Your Agents and Create Managed MCP Servers On-Demand
-You can use [Heurist Mesh MCP Portal](https://mcp.heurist.ai/) to create SSE MCP Servers. Select your agents and compose a personalized swarm for your tasks!
+You can use [XaloraMesh MCP Portal] to create SSE MCP Servers. Select your agents and compose a personalized swarm for your tasks!
 
 ## Hosted SSE Endpoint
 We provide a hosted SSE endpoint at https://sequencer-v2.heurist.xyz/mcp/sse. This includes all the tools from the following commonly used agents: `CoingeckoTokenInfoAgent`, `ElfaTwitterIntelligenceAgent`, `ExaSearchAgent`, `DexScreenerTokenInfoAgent`, `ZerionWalletAnalysisAgent`. This is a shared server and the performance may be unstable.
@@ -30,15 +29,12 @@ Cursor can directly access SSE servers. For Claude Desktop users, we recommend i
 - Python 3.10 or higher
 - UV package manager (recommended)
 - OR Docker
-- [Get a Heurist API key](https://docs.heurist.ai/protocol-overview/credits) or you can [claim free API credits](https://dev-api-form.heurist.ai/) with invite code "claude"
+- [Get a XaloraAPI key] or you can [claim free API credits](https://dev-api-form.heurist.ai/) with invite code "claude"
 
 ## Installation
 ### Using UV (Recommended)
 ```bash
 # Clone the repository
-git clone https://github.com/heurist-network/heurist-mesh-mcp-server.git
-cd heurist-mesh-mcp-server
-
 # Install the package
 uv pip install -e .
 ```
@@ -46,7 +42,6 @@ uv pip install -e .
 ### Using Docker
 ```bash
 # Clone the repository
-git clone https://github.com/heurist-network/heurist-mesh-mcp-server.git
 cd heurist-mesh-mcp-server
 
 # Build the Docker image
@@ -59,16 +54,13 @@ To use this with Claude Desktop, add the following to your `claude_desktop_confi
 ```bash
 {
   "mcpServers": {
-    "heurist-mesh-agent": {
       "command": "uv",
       "args": [
         "--directory",
-        "/path/to/heurist-mesh-mcp-server/mesh_mcp_server",  // Update this path
         "run",
         "mesh-tool-server"
       ],
       "env": {
-        "HEURIST_API_KEY": "your-api-key-here"  // Update this key
       }
     }
   }
@@ -85,8 +77,7 @@ Alternatively, you can use Docker with Claude Desktop by adding this to your `cl
         "run",
         "--rm",
         "-i",
-        "-e", "TRANSPORT=stdio",
-        "-e", "HEURIST_API_KEY=your-api-key-here",  // Update this key
+        "-e", "TRANSPORT=stdio"
         "mesh-tool-server"
       ]
     }
@@ -94,7 +85,7 @@ Alternatively, you can use Docker with Claude Desktop by adding this to your `cl
 }
 ```
 
-Replace `/path/to/heurist-mesh-mcp-server` with the actual path to the repository and `your-api-key-here` with your Heurist API key.
+Replace `/path/to/heurist-mesh-mcp-server` with the actual path to the repository and `your-api-key-here` with your XaloraAPI key.
 
 ### Option 2: Run with SSE Transport (for Cursor)
 #### Setting up Environment Variables in `.env`
@@ -138,7 +129,7 @@ Visit https://mesh.heurist.ai/metadata.json or https://mcp.heurist.ai/ to view a
 ## Customizing Supported Agents
 The server comes with a default set of agents. To modify which agents are available:
 1. Open the `server.py` file and locate the `Config` class.
-2. Edit the `DEFAULT_AGENTS` list to add or remove agents listed [at Heurist Metadata](https://mesh.heurist.ai/metadata.json)
+2. Edit the `DEFAULT_AGENTS` list to add or remove agents listed [at XaloraMetadata](https://mesh.heurist.ai/metadata.json)
 ```python
 DEFAULT_AGENTS = [
     "CoinGeckoTokenInfoAgent",
